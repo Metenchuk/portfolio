@@ -157,10 +157,11 @@ const projects = [
         num: '04',
         title: 'TicketDesk',
         subtitle: { ua: 'Support Ticketing Platform', en: 'Support Ticketing Platform' },
-        image: '/ticketdesk.png',
+        image: '/
+        ',
         description: {
             ua: 'B2B-інструмент для роботи з тікетами техпідтримки: split-view лейаут з незалежним скролом панелей, URL-driven стан для прямих посилань на будь-який тікет, optimistic UI — статус змінюється миттєво й відкочується при помилці. Inline-редагування заголовка, таймлайн активності, SLA-трекінг із виявленням порушень, automation rules і real-time колаборація агентів через WebSockets.',
-            en: 'B2B support ticketing tool built around a split-view layout with independently scrolling panes. URL-driven state makes every ticket directly linkable. Optimistic UI updates status instantly and rolls back on error. Inline title editing, activity timeline, SLA breach tracking, automation rules, and real-time agent collaboration over WebSockets.',
+            en: 'B2B support каticketing tool built around a split-view layout with independently scrolling panes. URL-driven state makes every ticket directly linkable. Optimistic UI updates status instantly and rolls back on error. Inline title editing, activity timeline, SLA breach tracking, automation rules, and real-time agent collaboration over WebSockets.',
         },
         tags: ['React 19', 'Express', 'Drizzle', 'PostgreSQL', 'TanStack Query', 'WebSocket'],
         demo: 'https://supportdesk-ai-five.vercel.app',

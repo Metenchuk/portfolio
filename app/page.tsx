@@ -114,59 +114,59 @@ const langOptions: { code: Lang; label: string }[] = [
 ];
 
 const projects = [
-    {
-        num: '01',
-        title: 'Nexus',
-        subtitle: { ua: 'AI Canvas Workspace', en: 'AI Canvas Workspace' },
-        image: '/nexus.png',
-        description: {
-            ua: "AI-простір, де кожен результат — веб-пошук, графік, зображення, аналіз документа — стає карткою на безмежному полотні. З'єднай дві картки ребром, і одна передає іншій контекст. Streaming-відповіді, цитований веб-пошук, Q&A по документах.",
-            en: 'AI workspace where every result — web search, chart, image, document analysis — becomes a card on an infinite canvas. Draw an edge between cards and one feeds the other as context. Streaming responses, cited web search, document Q&A.',
-        },
-        tags: ['Next.js 16', 'React Flow', 'Vercel AI SDK', 'Gemini', 'Prisma', 'PostgreSQL'],
-        demo: 'https://nexus-ai-chi-orcin.vercel.app',
-        github: 'https://github.com/Metenchuk/Nexus-ai',
+  {
+    num: "01",
+    title: "Nexus",
+    subtitle: { ua: "AI Canvas Workspace", en: "AI Canvas Workspace" },
+    image: "/nexus.png",
+    description: {
+      ua: "AI-простір, де кожен результат — веб-пошук, графік, зображення, аналіз документа — стає карткою на безмежному полотні. З'єднай дві картки ребром, і одна передає іншій контекст. Streaming-відповіді, цитований веб-пошук, Q&A по документах.",
+      en: "AI workspace where every result — web search, chart, image, document analysis — becomes a card on an infinite canvas. Draw an edge between cards and one feeds the other as context. Streaming responses, cited web search, document Q&A.",
     },
-    {
-        num: '02',
-        title: 'TaskFlow',
-        subtitle: { ua: 'Project Management SaaS', en: 'Project Management SaaS' },
-        image: '/taskflow.png',
-        description: {
-            ua: 'Full-stack SaaS: Kanban-дошки, AI-генерація задач, health-скоринг проєктів і Stripe-білінг. Бекенд на NestJS + фронтенд на React, JWT-авторизація з трекінгом сесій, drag-and-drop дошка.',
-            en: 'Full-stack SaaS with Kanban boards, AI task generation, project health scoring and Stripe billing. NestJS backend + React frontend, JWT auth with device/session tracking, drag-and-drop board.',
-        },
-        tags: ['React 19', 'NestJS', 'Prisma', 'Stripe', 'PostgreSQL', 'Docker'],
-        demo: 'https://task-flow-bay-nu.vercel.app',
-        github: 'https://github.com/Metenchuk/TaskFlow',
+    tags: ["Next.js 16", "React Flow", "Vercel AI SDK", "Gemini", "Prisma", "PostgreSQL"],
+    demo: "https://nexus-ai-chi-orcin.vercel.app",
+    github: "https://github.com/Metenchuk/Nexus-ai",
+  },
+  {
+    num: "02",
+    title: "TaskFlow",
+    subtitle: { ua: "Project Management SaaS", en: "Project Management SaaS" },
+    image: "/taskflow.png",
+    description: {
+      ua: "Full-stack SaaS: Kanban-дошки, AI-генерація задач, health-скоринг проєктів і Stripe-білінг. Бекенд на NestJS + фронтенд на React, JWT-авторизація з трекінгом сесій, drag-and-drop дошка.",
+      en: "Full-stack SaaS with Kanban boards, AI task generation, project health scoring and Stripe billing. NestJS backend + React frontend, JWT auth with device/session tracking, drag-and-drop board.",
     },
-    {
-        num: '03',
-        title: 'MealMover',
-        subtitle: { ua: 'Food Delivery Platform', en: 'Food Delivery Platform' },
-        image: '/mealmover.png',
-        description: {
-            ua: 'Full-stack платформа доставки їжі: каталог ресторанів на React Server Components, фільтрація меню в SQL, persistent Zustand-кошик, повний checkout із серверним підрахунком сум, OAuth-вхід.',
-            en: 'Full-stack food delivery platform: restaurant catalog on React Server Components, menu filtering in SQL, persistent Zustand cart, full checkout with server-side order totals, OAuth sign-in.',
-        },
-        tags: ['Next.js 16', 'RSC', 'NextAuth', 'Prisma', 'Upstash Redis', 'GSAP'],
-        demo: 'https://mealmover-5va8.vercel.app',
-        github: 'https://github.com/Metenchuk/mealmover',
+    tags: ["React 19", "NestJS", "Prisma", "Stripe", "PostgreSQL", "Docker"],
+    demo: "https://task-flow-bay-nu.vercel.app",
+    github: "https://github.com/Metenchuk/TaskFlow",
+  },
+  {
+    num: "03",
+    title: "MealMover",
+    subtitle: { ua: "Food Delivery Platform", en: "Food Delivery Platform" },
+    image: "/mealmover.png",
+    description: {
+      ua: "Full-stack платформа доставки їжі: каталог ресторанів на React Server Components, фільтрація меню в SQL, persistent Zustand-кошик, повний checkout із серверним підрахунком сум, OAuth-вхід.",
+      en: "Full-stack food delivery platform: restaurant catalog on React Server Components, menu filtering in SQL, persistent Zustand cart, full checkout with server-side order totals, OAuth sign-in.",
     },
-    {
-        num: '04',
-        title: 'TicketDesk',
-        subtitle: { ua: 'Support Ticketing Platform', en: 'Support Ticketing Platform' },
-        image: '/ticketdesk.png',
-        description: {
-            ua: 'B2B-інструмент для роботи з тікетами техпідтримки: split-view лейаут з незалежним скролом панелей, URL-driven стан для прямих посилань на будь-який тікет, optimistic UI — статус змінюється миттєво й відкочується при помилці. Inline-редагування заголовка, таймлайн активності, SLA-трекінг із виявленням порушень, automation rules і real-time колаборація агентів через WebSockets.',
-            en: 'B2B support каticketing tool built around a split-view layout with independently scrolling panes. URL-driven state makes every ticket directly linkable. Optimistic UI updates status instantly and rolls back on error. Inline title editing, activity timeline, SLA breach tracking, automation rules, and real-time agent collaboration over WebSockets.',
-        },
-        tags: ['React 19', 'Express', 'Drizzle', 'PostgreSQL', 'TanStack Query', 'WebSocket'],
-        demo: 'https://supportdesk-ai-five.vercel.app',
-        github: 'https://github.com/Metenchuk/supportdesk-ai',
+    tags: ["Next.js 16", "RSC", "NextAuth", "Prisma", "Upstash Redis", "GSAP"],
+    demo: "https://mealmover-5va8.vercel.app",
+    github: "https://github.com/Metenchuk/mealmover",
+  },
+  {
+    num: "04",
+    title: "TicketDesk",
+    subtitle: { ua: "Support Ticketing Platform", en: "Support Ticketing Platform" },
+    image: "/ticketdesk.png",
+    description: {
+      ua: "Клавіатурний split-view інструмент для техпідтримки в стилі Linear: список тікетів ліворуч, деталь праворуч. Стан живе в URL для розшарюваних посилань, optimistic-оновлення статусів, командна палітра Cmd+K і real-time колаборація агентів через WebSockets.",
+      en: "A keyboard-first split-view support tool inspired by Linear: ticket list on the left, detail on the right. State lives in the URL for shareable links, optimistic status updates, a Cmd+K command palette, and real-time agent collaboration over WebSockets.",
     },
-]
+    tags: ["React 19", "Express", "Drizzle", "PostgreSQL", "TanStack Query", "WebSocket"],
+    demo: "https://supportdesk-ai-five.vercel.app",
+    github: "https://github.com/Metenchuk/supportdesk-ai",
+  },
+];
 
 const skillGroups = [
   { icon: Monitor, title: { ua: "Frontend", en: "Frontend" }, items: ["React 19", "Next.js", "TypeScript", "Tailwind CSS", "Zustand", "TanStack Query", "Framer Motion", "React Flow", "Zod"] },

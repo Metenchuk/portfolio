@@ -5,14 +5,11 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Monitor, Code2, Database, TerminalSquare, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-/* ------------------------------------------------------------------ */
-/*  i18n content                                                      */
-/* ------------------------------------------------------------------ */
-
 type Lang = "ua" | "en";
 
 const t = {
   ua: {
+    heroBadge: "Open to work · Junior Frontend · Львів / remote",
     role: "FRONTEND DEVELOPER",
     tagline: "Будую production-застосунки з реальними БД, авторизацією, платежами та AI — не UI-демо.",
     nav: { about: "Про мене", work: "Проєкти", skills: "Навички", contact: "Контакти" },
@@ -35,7 +32,7 @@ const t = {
     aboutP3:
       "Студент другого курсу Software Engineering у Львівській політехніці. Основні проєкти зробив соло — від схеми до деплою, з тестами й CI. Шукаю першу роль у frontend-команді.",
     available: "Доступний до роботи",
-    workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
+    workSub: "Чотири застосунки в продакшні · соло від схеми БД до деплою",
     live: "Live demo",
     source: "Код",
     qualitiesTech: "Технології",
@@ -57,9 +54,10 @@ const t = {
     ],
     contactSub: "FRONTEND DEVELOPER",
     contactText:
-      "Шукаю Junior / Trainee Frontend або Full-Stack роль, віддалено або у Львові. Доступний 25–30 год/тиждень. Якщо щось у роботах зачепило — пишіть.",
+      "Шукаю Junior Frontend або Full-Stack роль, віддалено або у Львові. Доступний 25–30 год/тиждень. Якщо щось у роботах зачепило — пишіть.",
   },
   en: {
+    heroBadge: "Open to work · Junior Frontend · Lviv / remote",
     role: "FRONTEND DEVELOPER",
     tagline: "I build production web apps with real databases, auth, payments and AI — not UI demos.",
     nav: { about: "About", work: "Work", skills: "Skills", contact: "Contact" },
@@ -82,7 +80,7 @@ const t = {
     aboutP3:
       "I'm a second-year Software Engineering student at Lviv Polytechnic, and I built my main projects solo — from schema to deploy, with tests and CI. I'm looking for my first role in a frontend team.",
     available: "Available for work",
-    workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
+    workSub: "Four apps in production · solo, from DB schema to deploy",
     live: "Live demo",
     source: "Source",
     qualitiesTech: "Technologies",
@@ -104,7 +102,7 @@ const t = {
     ],
     contactSub: "FRONTEND DEVELOPER",
     contactText:
-      "Looking for a Junior / Trainee Frontend or Full-Stack role, remote or Lviv. Available 25–30 h/week. If something in my work caught your eye — feel free to reach out.",
+      "Looking for a Junior Frontend or Full-Stack role, remote or Lviv. Available 25–30 h/week. If something in my work caught your eye — feel free to reach out.",
   },
 } as const;
 
@@ -119,6 +117,7 @@ const projects = [
     title: "Nexus",
     subtitle: { ua: "AI Canvas Workspace", en: "AI Canvas Workspace" },
     image: "/nexus.png",
+    impact: { ua: "pgvector RAG з цитуванням по сторінках · стрімінг у картки", en: "pgvector RAG with page-level citations · streaming into cards" },
     description: {
       ua: "AI-простір, де кожен результат — веб-пошук, графік, зображення, аналіз документа — стає карткою на безмежному полотні. З'єднай дві картки ребром, і одна передає іншій контекст. Streaming-відповіді, цитований веб-пошук, Q&A по документах.",
       en: "AI workspace where every result — web search, chart, image, document analysis — becomes a card on an infinite canvas. Draw an edge between cards and one feeds the other as context. Streaming responses, cited web search, document Q&A.",
@@ -132,6 +131,7 @@ const projects = [
     title: "TaskFlow",
     subtitle: { ua: "Project Management SaaS", en: "Project Management SaaS" },
     image: "/taskflow.png",
+    impact: { ua: "Детермінований health-скоринг · Stripe-підписки · real-time чат", en: "Deterministic health scoring · Stripe subscriptions · real-time chat" },
     description: {
       ua: "Full-stack SaaS: Kanban-дошки, AI-генерація задач, health-скоринг проєктів і Stripe-білінг. Бекенд на NestJS + фронтенд на React, JWT-авторизація з трекінгом сесій, drag-and-drop дошка.",
       en: "Full-stack SaaS with Kanban boards, AI task generation, project health scoring and Stripe billing. NestJS backend + React frontend, JWT auth with device/session tracking, drag-and-drop board.",
@@ -145,6 +145,7 @@ const projects = [
     title: "MealMover",
     subtitle: { ua: "Food Delivery Platform", en: "Food Delivery Platform" },
     image: "/mealmover.png",
+    impact: { ua: "Фільтрація в SQL замість rate-limited API · трекінг без polling", en: "SQL filtering over a rate-limited API · order tracking without polling" },
     description: {
       ua: "Full-stack платформа доставки їжі: каталог ресторанів на React Server Components, фільтрація меню в SQL, persistent Zustand-кошик, повний checkout із серверним підрахунком сум, OAuth-вхід.",
       en: "Full-stack food delivery platform: restaurant catalog on React Server Components, menu filtering in SQL, persistent Zustand cart, full checkout with server-side order totals, OAuth sign-in.",
@@ -158,6 +159,7 @@ const projects = [
     title: "TicketDesk",
     subtitle: { ua: "Support Ticketing Platform", en: "Support Ticketing Platform" },
     image: "/ticketdesk.png",
+    impact: { ua: "Стан в URL · optimistic UI · Cmd+K · WebSocket-колаборація", en: "URL-driven state · optimistic UI · Cmd+K · WebSocket collaboration" },
     description: {
       ua: "Клавіатурний split-view інструмент для техпідтримки в стилі Linear: список тікетів ліворуч, деталь праворуч. Стан живе в URL для розшарюваних посилань, optimistic-оновлення статусів, командна палітра Cmd+K і real-time колаборація агентів через WebSockets.",
       en: "A keyboard-first split-view support tool inspired by Linear: ticket list on the left, detail on the right. State lives in the URL for shareable links, optimistic status updates, a Cmd+K command palette, and real-time agent collaboration over WebSockets.",
@@ -175,21 +177,6 @@ const skillGroups = [
   { icon: TerminalSquare, title: { ua: "Інструменти", en: "Tools & Workflow" }, items: ["Git / GitHub", "Vercel", "Render", "Vite", "Vitest", "GitHub Actions", "Stripe", "Figma"] },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Motion helpers                                                    */
-/* ------------------------------------------------------------------ */
-
-const reveal = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
-};
-
-/* A section whose heading + content fade/slide in together as you reach it */
 function Section({
   id,
   heading,
@@ -199,6 +186,16 @@ function Section({
   heading: string;
   children: React.ReactNode;
 }) {
+  const reveal = {
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const stagger = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+  };
+
   return (
     <motion.section
       id={id}
@@ -220,10 +217,6 @@ function Section({
     </motion.section>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  Language dropdown                                                 */
-/* ------------------------------------------------------------------ */
 
 function LangPicker({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const [open, setOpen] = useState(false);
@@ -281,10 +274,6 @@ function LangPicker({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Page                                                              */
-/* ------------------------------------------------------------------ */
-
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [lang, setLang] = useState<Lang>("ua");
@@ -296,9 +285,18 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const reveal = {
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const stagger = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+  };
+
   return (
     <div className="min-h-screen bg-[#080b14] text-slate-300 antialiased selection:bg-sky-400/25">
-      {/* Header */}
       <header className="sticky top-0 z-50 px-4 pt-4">
         <div
           className={`mx-auto flex max-w-5xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
@@ -328,12 +326,21 @@ export default function Home() {
       </header>
 
       <main id="top" className="mx-auto max-w-5xl px-6">
-        {/* Hero */}
         <section className="flex min-h-[80vh] flex-col justify-center pb-24 pt-16">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
+            className="mb-6 flex items-center gap-2 self-start rounded-full border border-emerald-400/25 bg-emerald-400/5 px-3 py-1.5 text-xs font-semibold text-emerald-300"
+          >
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+            {L.heroBadge}
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6 font-mono text-sm tracking-[0.3em] text-slate-500"
           >
             {L.role}
@@ -392,7 +399,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* About */}
         <Section id="about" heading={L.sec.about}>
           <motion.div
             variants={reveal}
@@ -422,7 +428,6 @@ export default function Home() {
           </motion.div>
         </Section>
 
-        {/* Skills */}
         <Section id="skills" heading={L.sec.skills}>
           <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {skillGroups.map((g) => {
@@ -454,7 +459,6 @@ export default function Home() {
           </motion.div>
         </Section>
 
-        {/* Work */}
         <Section id="work" heading={L.sec.work}>
           <motion.p variants={reveal} transition={{ duration: 0.5 }} className="-mt-8 mb-10 font-mono text-sm text-slate-500">
             {L.workSub}
@@ -483,6 +487,7 @@ export default function Home() {
                     <span className="font-mono text-xs text-slate-500">{p.subtitle[lang]}</span>
                   </div>
                   <h3 className="text-2xl font-bold text-white">{p.title}</h3>
+                  <p className="mt-2 text-sm font-semibold text-sky-300">{p.impact[lang]}</p>
                   <p className="mt-3 text-sm leading-relaxed text-slate-400">{p.description[lang]}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {p.tags.map((tag) => (
@@ -502,7 +507,6 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Personal traits + tech */}
         <Section heading={L.sec.qualities}>
           <motion.p variants={reveal} transition={{ duration: 0.5 }} className="mb-4 font-mono text-xs tracking-widest text-slate-500">
             {L.qualitiesTech}
@@ -537,7 +541,6 @@ export default function Home() {
           </motion.div>
         </Section>
 
-        {/* Contact */}
         <Section id="contact" heading={L.sec.contact}>
           <motion.div variants={reveal} transition={{ duration: 0.6, ease: "easeOut" }}>
             <h3 className="text-5xl font-black leading-[0.95] tracking-tighter sm:text-7xl">

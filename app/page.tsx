@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Monitor, Code2, Database, TerminalSquare } from "lucide-react";
+import { ArrowUpRight, Monitor, Code2, Database, TerminalSquare, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
@@ -36,10 +36,15 @@ const t = {
       "Студент другого курсу Software Engineering у Львівській політехніці. Три основні проєкти зробив соло — від схеми до деплою, з тестами й CI. Шукаю першу роль у frontend-команді.",
     available: "Доступний до роботи",
     workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
-    viewProject: "Переглянути проєкт",
     live: "Live demo",
     source: "Код",
-    qualities: [
+    qualitiesTech: "Технології",
+    qualitiesSoft: "Про мене як розробника",
+    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "JavaScript", "Prisma ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
+    soft: [
+      "Готовий працювати",
+      "Цілеспрямований",
+      "Завжди готовий допомогти",
       "Швидко навчаюся",
       "Висока увага до деталей",
       "Самодисципліна",
@@ -47,11 +52,12 @@ const t = {
       "Командна робота",
       "Чітка комунікація",
       "Відповідальність і самостійність",
+      "Наполегливий",
       "Постійне навчання",
     ],
     contactSub: "FRONTEND DEVELOPER",
     contactText:
-      "Шукаю Junior / Trainee Frontend або Full-Stack роль, віддалено або у Львові. Якщо щось у роботах зачепило — пишіть.",
+      "Шукаю Junior / Trainee Frontend або Full-Stack роль, віддалено або у Львові. Доступний 25–30 год/тиждень. Якщо щось у роботах зачепило — пишіть.",
   },
   en: {
     role: "FRONTEND DEVELOPER",
@@ -77,10 +83,15 @@ const t = {
       "I'm a second-year Software Engineering student at Lviv Polytechnic, and I built my three main projects solo — from schema to deploy, with tests and CI. I'm looking for my first role in a frontend team.",
     available: "Available for work",
     workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
-    viewProject: "View project",
     live: "Live demo",
     source: "Source",
-    qualities: [
+    qualitiesTech: "Technologies",
+    qualitiesSoft: "As a developer",
+    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "JavaScript", "Prisma ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
+    soft: [
+      "Ready to work",
+      "Goal-oriented",
+      "Always ready to help",
       "Fast learner",
       "High attention to detail",
       "Self-discipline",
@@ -88,13 +99,19 @@ const t = {
       "Teamwork",
       "Clear communication",
       "Ownership & autonomy",
+      "Persistent",
       "Continuous learning",
     ],
     contactSub: "FRONTEND DEVELOPER",
     contactText:
-      "Looking for a Junior / Trainee Frontend or Full-Stack role, remote or Lviv. If something in my work caught your eye — feel free to reach out.",
+      "Looking for a Junior / Trainee Frontend or Full-Stack role, remote or Lviv. Available 25–30 h/week. If something in my work caught your eye — feel free to reach out.",
   },
 } as const;
+
+const langOptions: { code: Lang; label: string }[] = [
+  { code: "ua", label: "🇺🇦 UA" },
+  { code: "en", label: "🇬🇧 EN" },
+];
 
 const projects = [
   {
@@ -156,22 +173,98 @@ const reveal = {
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
 
-function SectionHeading({ children }: { children: string }) {
+/* A section whose heading + content fade/slide in together as you reach it */
+function Section({
+  id,
+  heading,
+  children,
+}: {
+  id?: string;
+  heading: string;
+  children: React.ReactNode;
+}) {
   return (
-    <motion.h2
+    <motion.section
+      id={id}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={reveal}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mb-12 flex items-center gap-3 text-3xl font-black tracking-tight text-white sm:text-4xl"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={stagger}
+      className="scroll-mt-24 pb-28"
     >
-      <span className="text-sky-400">{">"}</span>
-      <span className="font-mono">{children}</span>
-    </motion.h2>
+      <motion.h2
+        variants={reveal}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+        className="mb-12 flex items-center gap-3 text-3xl font-black tracking-tight text-white sm:text-4xl"
+      >
+        <span className="text-sky-400">{">"}</span>
+        <span className="font-mono">{heading}</span>
+      </motion.h2>
+      {children}
+    </motion.section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Language dropdown                                                  */
+/* ------------------------------------------------------------------ */
+
+function LangPicker({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  const current = langOptions.find((o) => o.code === lang)!;
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="flex items-center gap-2 rounded-lg border border-sky-400/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-sky-400/50"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        {current.label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <motion.ul
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.15 }}
+          className="absolute right-0 z-50 mt-2 w-32 overflow-hidden rounded-lg border border-sky-400/20 bg-[#0b1020] shadow-[0_8px_30px_-8px_rgba(56,189,248,0.35)]"
+          role="listbox"
+        >
+          {langOptions.map((o) => (
+            <li key={o.code} role="option" aria-selected={o.code === lang}>
+              <button
+                onClick={() => {
+                  setLang(o.code);
+                  setOpen(false);
+                }}
+                className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-semibold transition-colors hover:bg-sky-400/10 ${
+                  o.code === lang ? "text-sky-300" : "text-slate-300"
+                }`}
+              >
+                {o.label}
+                {o.code === lang && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-sky-400" />}
+              </button>
+            </li>
+          ))}
+        </motion.ul>
+      )}
+    </div>
   );
 }
 
@@ -217,14 +310,7 @@ export default function Home() {
             <a href="#contact" className="transition-colors hover:text-sky-300">{L.nav.contact}</a>
           </nav>
 
-          <button
-            onClick={() => setLang((p) => (p === "ua" ? "en" : "ua"))}
-            className="flex items-center gap-2 rounded-lg border border-sky-400/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-sky-400/50"
-            aria-label="Switch language"
-          >
-            {lang === "ua" ? "🇺🇦 UA" : "🇬🇧 EN"}
-            <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-          </button>
+          <LangPicker lang={lang} setLang={setLang} />
         </div>
       </header>
 
@@ -289,17 +375,13 @@ export default function Home() {
             className="mt-12 flex gap-3 font-mono text-sm"
           >
             <a href="https://github.com/Metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">GitHub</a>
-            <a href="https://linkedin.com/in/nazar-metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/nazar-metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">LinkedIn</a>
           </motion.div>
         </section>
 
         {/* About */}
-        <section id="about" className="scroll-mt-24 pb-28">
-          <SectionHeading>{L.sec.about}</SectionHeading>
+        <Section id="about" heading={L.sec.about}>
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
             variants={reveal}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="grid gap-6 rounded-2xl border border-white/5 bg-[#0b1020]/60 p-6 sm:p-8 lg:grid-cols-[1.4fr_1fr]"
@@ -325,18 +407,11 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
-        </section>
+        </Section>
 
         {/* Skills */}
-        <section id="skills" className="scroll-mt-24 pb-28">
-          <SectionHeading>{L.sec.skills}</SectionHeading>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-          >
+        <Section id="skills" heading={L.sec.skills}>
+          <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {skillGroups.map((g) => {
               const Icon = g.icon;
               return (
@@ -364,22 +439,20 @@ export default function Home() {
               );
             })}
           </motion.div>
-        </section>
+        </Section>
 
         {/* Work */}
-        <section id="work" className="scroll-mt-24 pb-28">
-          <SectionHeading>{L.sec.work}</SectionHeading>
-          <p className="-mt-8 mb-10 font-mono text-sm text-slate-500">{L.workSub}</p>
+        <Section id="work" heading={L.sec.work}>
+          <motion.p variants={reveal} transition={{ duration: 0.5 }} className="-mt-8 mb-10 font-mono text-sm text-slate-500">
+            {L.workSub}
+          </motion.p>
 
           <div className="space-y-8">
             {projects.map((p, i) => (
               <motion.div
                 key={p.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
                 variants={reveal}
-                transition={{ duration: 0.55, ease: "easeOut", delay: i * 0.05 }}
+                transition={{ duration: 0.55, ease: "easeOut" }}
                 className="group grid gap-0 overflow-hidden rounded-2xl border border-white/5 bg-[#0b1020]/60 transition-colors hover:border-sky-400/25 lg:grid-cols-2"
               >
                 <div className={`relative aspect-[16/10] w-full overflow-hidden ${i % 2 ? "lg:order-2" : ""}`}>
@@ -414,19 +487,31 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </Section>
 
-        {/* Qualities */}
-        <section className="scroll-mt-24 pb-28">
-          <SectionHeading>{L.sec.qualities}</SectionHeading>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="flex flex-wrap gap-3"
-          >
-            {L.qualities.map((q) => (
+        {/* Personal traits + tech */}
+        <Section heading={L.sec.qualities}>
+          <motion.p variants={reveal} transition={{ duration: 0.5 }} className="mb-4 font-mono text-xs tracking-widest text-slate-500">
+            {L.qualitiesTech}
+          </motion.p>
+          <motion.div variants={stagger} className="mb-10 flex flex-wrap gap-3">
+            {L.tech.map((s) => (
+              <motion.span
+                key={s}
+                variants={reveal}
+                transition={{ duration: 0.4 }}
+                className="rounded-xl border border-sky-400/20 bg-sky-400/5 px-4 py-2.5 font-mono text-sm text-sky-300 transition-colors hover:border-sky-400/50"
+              >
+                {s}
+              </motion.span>
+            ))}
+          </motion.div>
+
+          <motion.p variants={reveal} transition={{ duration: 0.5 }} className="mb-4 font-mono text-xs tracking-widest text-slate-500">
+            {L.qualitiesSoft}
+          </motion.p>
+          <motion.div variants={stagger} className="flex flex-wrap gap-3">
+            {L.soft.map((q) => (
               <motion.span
                 key={q}
                 variants={reveal}
@@ -437,18 +522,11 @@ export default function Home() {
               </motion.span>
             ))}
           </motion.div>
-        </section>
+        </Section>
 
         {/* Contact */}
-        <section id="contact" className="scroll-mt-24 pb-28">
-          <SectionHeading>{L.sec.contact}</SectionHeading>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={reveal}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+        <Section id="contact" heading={L.sec.contact}>
+          <motion.div variants={reveal} transition={{ duration: 0.6, ease: "easeOut" }}>
             <h3 className="text-5xl font-black leading-[0.95] tracking-tighter sm:text-7xl">
               <span className="text-white">Nazar</span><br />
               <span className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">Metenchuk</span>
@@ -458,10 +536,10 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-3 font-mono text-sm">
               <a href="mailto:metenchuk.nazar@gmail.com" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">Email</a>
               <a href="https://github.com/Metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">GitHub</a>
-              <a href="https://linkedin.com/in/nazar-metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/nazar-metenchuk" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-300 transition-colors hover:text-sky-300">LinkedIn</a>
             </div>
           </motion.div>
-        </section>
+        </Section>
 
         <footer className="border-t border-white/5 py-8 font-mono text-xs text-slate-600">
           {lang === "ua" ? "Зроблено з Next.js і Tailwind" : "Built with Next.js & Tailwind"} · Nazar Metenchuk 2026

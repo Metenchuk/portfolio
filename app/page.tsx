@@ -6,7 +6,7 @@ import { ArrowUpRight, Monitor, Code2, Database, TerminalSquare, ChevronDown } f
 import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
-/*  i18n content                                                       */
+/*  i18n content                                                      */
 /* ------------------------------------------------------------------ */
 
 type Lang = "ua" | "en";
@@ -29,18 +29,18 @@ const t = {
     focusText:
       "Сучасні full-stack застосунки з фокусом на server-first архітектуру, типобезпеку від схеми БД до форми, автентифікацію, платежі та AI-інтеграції.",
     aboutP1:
-      "Працюю переважно з React, Next.js і TypeScript на фронтенді та NestJS із PostgreSQL на бекенді. Мої проєкти виходять із реальними базами даних, авторизацією, платежами та AI — мета завжди відтворити те, як виглядає робочий продукт від і до.",
+      "Працюю переважно з React, Next.js і TypeScript на фронтенді та NestJS або Express із PostgreSQL на бекенді. Мої проєкти виходять із реальними базами даних, авторизацією, платежами та AI — мета завжди відтворити те, як виглядає робочий продукт від і до.",
     aboutP2:
       "Зараз будую AI-інтерфейси на Vercel AI SDK і Google Gemini. Дбаю про чисту feature-based структуру, яка лишається читабельною, поки проєкт росте.",
     aboutP3:
-      "Студент другого курсу Software Engineering у Львівській політехніці. Три основні проєкти зробив соло — від схеми до деплою, з тестами й CI. Шукаю першу роль у frontend-команді.",
+      "Студент другого курсу Software Engineering у Львівській політехніці. Основні проєкти зробив соло — від схеми до деплою, з тестами й CI. Шукаю першу роль у frontend-команді.",
     available: "Доступний до роботи",
     workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
     live: "Live demo",
     source: "Код",
     qualitiesTech: "Технології",
     qualitiesSoft: "Про мене як розробника",
-    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "JavaScript", "Prisma ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
+    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "Express", "JavaScript", "Prisma ORM", "Drizzle ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
     soft: [
       "Готовий працювати",
       "Цілеспрямований",
@@ -76,18 +76,18 @@ const t = {
     focusText:
       "Modern full-stack apps focused on server-first architecture, type safety from the database schema to the form, authentication, payments and AI integrations.",
     aboutP1:
-      "I work primarily with React, Next.js and TypeScript on the frontend, and NestJS with PostgreSQL on the backend. My projects ship with real databases, authentication, payments and AI integrations — the goal is always to mirror what a working product looks like end-to-end.",
+      "I work primarily with React, Next.js and TypeScript on the frontend, and NestJS or Express with PostgreSQL on the backend. My projects ship with real databases, authentication, payments and AI integrations — the goal is always to mirror what a working product looks like end-to-end.",
     aboutP2:
       "I'm currently building AI-powered interfaces with the Vercel AI SDK and Google Gemini. I care about a clean feature-based structure that stays readable as a project grows.",
     aboutP3:
-      "I'm a second-year Software Engineering student at Lviv Polytechnic, and I built my three main projects solo — from schema to deploy, with tests and CI. I'm looking for my first role in a frontend team.",
+      "I'm a second-year Software Engineering student at Lviv Polytechnic, and I built my main projects solo — from schema to deploy, with tests and CI. I'm looking for my first role in a frontend team.",
     available: "Available for work",
     workSub: "GitHub Portfolio · Full-Stack & Frontend Development",
     live: "Live demo",
     source: "Source",
     qualitiesTech: "Technologies",
     qualitiesSoft: "As a developer",
-    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "JavaScript", "Prisma ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
+    tech: ["React 19", "Next.js", "TypeScript", "Node.js", "NestJS", "Express", "JavaScript", "Prisma ORM", "Drizzle ORM", "Tailwind CSS", "Zustand", "PostgreSQL"],
     soft: [
       "Ready to work",
       "Goal-oriented",
@@ -153,17 +153,30 @@ const projects = [
     demo: "https://mealmover-5va8.vercel.app",
     github: "https://github.com/Metenchuk/mealmover",
   },
+  {
+    num: "04",
+    title: "TicketDesk",
+    subtitle: { ua: "Support Ticketing Platform", en: "Support Ticketing Platform" },
+    image: "/ticketdesk.png",
+    description: {
+      ua: "Клавіатурний split-view інструмент для техпідтримки в стилі Linear: список тікетів ліворуч, деталь праворуч. Стан живе в URL для розшарюваних посилань, optimistic-оновлення статусів, командна палітра Cmd+K і real-time колаборація агентів через WebSockets.",
+      en: "A keyboard-first split-view support tool inspired by Linear: ticket list on the left, detail on the right. State lives in the URL for shareable links, optimistic status updates, a Cmd+K command palette, and real-time agent collaboration over WebSockets.",
+    },
+    tags: ["React 19", "Express", "Drizzle", "PostgreSQL", "TanStack Query", "WebSocket"],
+    demo: "https://supportdesk-ai-five.vercel.app",
+    github: "https://github.com/Metenchuk/supportdesk-ai",
+  },
 ];
 
 const skillGroups = [
   { icon: Monitor, title: { ua: "Frontend", en: "Frontend" }, items: ["React 19", "Next.js", "TypeScript", "Tailwind CSS", "Zustand", "TanStack Query", "Framer Motion", "React Flow", "Zod"] },
-  { icon: Code2, title: { ua: "Backend", en: "Backend" }, items: ["NestJS", "Node.js", "PostgreSQL", "Prisma", "Socket.io", "JWT", "REST API", "Docker"] },
-  { icon: Database, title: { ua: "База даних", en: "Database" }, items: ["PostgreSQL", "Prisma", "pgvector", "Upstash Redis", "Neon"] },
-  { icon: TerminalSquare, title: { ua: "Інструменти", en: "Tools & Workflow" }, items: ["Git / GitHub", "Vercel", "Vite", "Vitest", "GitHub Actions", "Stripe", "Figma"] },
+  { icon: Code2, title: { ua: "Backend", en: "Backend" }, items: ["NestJS", "Express", "Node.js", "PostgreSQL", "Prisma", "Drizzle ORM", "WebSocket", "JWT", "REST API", "Docker"] },
+  { icon: Database, title: { ua: "База даних", en: "Database" }, items: ["PostgreSQL", "Prisma", "Drizzle ORM", "pgvector", "Upstash Redis", "Neon"] },
+  { icon: TerminalSquare, title: { ua: "Інструменти", en: "Tools & Workflow" }, items: ["Git / GitHub", "Vercel", "Render", "Vite", "Vitest", "GitHub Actions", "Stripe", "Figma"] },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Motion helpers                                                     */
+/*  Motion helpers                                                    */
 /* ------------------------------------------------------------------ */
 
 const reveal = {
@@ -209,7 +222,7 @@ function Section({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Language dropdown                                                  */
+/*  Language dropdown                                                 */
 /* ------------------------------------------------------------------ */
 
 function LangPicker({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
@@ -269,7 +282,7 @@ function LangPicker({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 }
 
 /* ------------------------------------------------------------------ */
-/*  Page                                                               */
+/*  Page                                                              */
 /* ------------------------------------------------------------------ */
 
 export default function Home() {
@@ -401,7 +414,7 @@ export default function Home() {
               <h3 className="mt-2 text-2xl font-bold text-white">{L.focusTitle}</h3>
               <p className="mt-4 text-sm leading-relaxed text-slate-400">{L.focusText}</p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {["React", "Next.js", "TypeScript", "NestJS", "PostgreSQL", "Prisma"].map((s) => (
+                {["React", "Next.js", "TypeScript", "NestJS", "Express", "PostgreSQL"].map((s) => (
                   <span key={s} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs text-sky-300">{s}</span>
                 ))}
               </div>
